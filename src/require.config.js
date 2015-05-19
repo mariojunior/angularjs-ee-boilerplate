@@ -4,35 +4,34 @@ require({
   paths: {
 
     jquery: [
-      'vendor/jquery/1.11.1/jquery.min'
+      'vendor/jquery/2.1.3/jquery.min'
     ],
 
     bootstrap: [
-      'vendor/bootstrap/3.2.0/js/bootstrap.min'
+      'vendor/bootstrap/3.3.2/js/bootstrap.min'
     ],
 
 
     angular: [
-      'vendor/angular.js/1.2.22/angular.min'
-    ],
-
-    angularRoute: [
-      'vendor/angular.js/1.2.22/angular-route.min'
+      'vendor/angular.js/1.3.11/angular.min'
     ],
 
     angularResource: [
-      'vendor/angular.js/1.2.22/angular-resource.min'
+      'vendor/angular.js/1.3.11/angular-resource.min'
     ],
 
     angularAnimate: [
-      'vendor/angular.js/1.2.22/angular-animate.min'
+      'vendor/angular.js/1.3.11/angular-animate.min'
     ],
 
 
-    angularUiBootstrap: [
-      'vendor/angular-ui/bootstrap/0.11.0/ui-bootstrap-tpls.min'
+    uiBootstrap: [
+      'vendor/angular-ui/bootstrap/0.12.0/ui-bootstrap-tpls.min'
     ],
 
+    uiRouter: [
+      'vendor/angular-ui/ui-router/0.2.13/angular-ui-router.min'
+    ],
 
     toaster: [
       'vendor/toaster/0.3.0/toaster'
@@ -45,17 +44,17 @@ require({
 
     // @begin: mock libs
     angularMocks: [
-      'vendor/angular.js/1.2.22/angular-mocks'
+      'vendor/angular.js/1.3.11/angular-mocks'
     ],
 
     angularMocksBackend: [
-      'vendor/angular-mocks-backend/0.1.6/angular-mocks-backend'
+      'vendor/angular-mocks-backend/0.1.7/angular-mocks-backend'
     ],
     // @end: mock libs
 
 
     lokijs: [
-      'vendor/lokijs/0.0.1/lokijs.min'
+      'vendor/lokijs/1.0.1/lokijs.min'
     ]
 
   },
@@ -72,19 +71,19 @@ require({
       exports: 'angular'
     },
 
-    'angularUiBootstrap': {
-      deps: ['bootstrap',  'angular']
-    },
-
-    'angularRoute': {
-      deps: ['angular']
-    },
-
     'angularResource': {
       deps: ['angular']
     },
 
     'angularAnimate': {
+      deps: ['angular']
+    },
+
+    'uiBootstrap': {
+      deps: ['bootstrap',  'angular']
+    },
+
+    'uiRouter': {
       deps: ['angular']
     },
 

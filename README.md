@@ -1,5 +1,7 @@
 # Angular.js Enterprise Edition Boilerplate
 
+[![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/the-front)
+
 This boilerplate (seed project, starting project) helps you build large scale [Angular.js](https://angularjs.org/) applications with [Require.js](http://requirejs.org/)
 
 --
@@ -7,6 +9,7 @@ This boilerplate (seed project, starting project) helps you build large scale [A
 * [README (en)](docs/en/README.md)
 
 * [README (pt-Br)](docs/pt-Br/README.md)
+
 
 ## Contributing
 
@@ -17,6 +20,11 @@ This boilerplate (seed project, starting project) helps you build large scale [A
 5. Submit a pull request :D
 
 English is the universal language nowadays, so please don't create or comment on issues using another language.
+
+
+## CHANGELOG
+
+Check [Releases](https://github.com/the-front/angularjs-ee-boilerplate/releases)
 
 
 ## License

@@ -6,16 +6,15 @@ define(function(require) {
   var module = require('shared/mock/module');
   require('lokijs');
 
-  module.factory(
+  var Lokijs = loki;
 
-    // factory name
-    'DataStore',
+  module.factory('DataStore', DataStoreFactory);
 
-    // factory dependencies injection
-    ['Helpers', '$log',
+  //---
 
-  // factory definition
-  function(helpers, console) {
+  DataStoreFactory.$inject = ['Helpers', '$log'];
+
+  function DataStoreFactory(helpers, console) {
 
     //--------------------------------------------------------------------------
 
@@ -33,7 +32,7 @@ define(function(require) {
       http://lokijs.org/
       https://github.com/techfort/LokiJS/blob/master/src/lokijs.js
     */
-    DataStore.db = new loki( 'mock.db' );
+    DataStore.db = new Lokijs( 'mock.db' );
 
     DataStore.addCollection = function() {
       return DataStore.db.addCollection.apply(
@@ -300,6 +299,6 @@ define(function(require) {
 
     return DataStore;
 
-  }]);
+  }
 
 });

@@ -42,11 +42,11 @@ Enter the following commands in the terminal
 ```bash
 $ git clone https://github.com/erkobridee/angularjs-ee-boilerplate.git
 $ cd angularjs-ee-boilerplate
-$ cd publicher
-$ npm install
-$ cd ..
 $ cd tools
 $ npm run setup
+$ cd ..
+$ cd publisher
+$ npm install
 ```
 
 
@@ -141,7 +141,7 @@ $ npm run setup
 
 * If you use Sublime Text, check this out:
 
-  * [[GitHub] maxhoffmann / angular-snippets](https://github.com/maxhoffmann/angular-snippets) - Sublime Text Snippets and Completions for Angular.js
+  * [[GitHub] the-front / sublime-angularjs-ee-snippets](https://github.com/the-front/sublime-angularjs-ee-snippets) - Sublime Text 2 / 3 Snippets and Completions for Angular.js, Angular UI Router and Require.js (focused to the angularjs-ee-boilerplate code)
 
   * [[GitHub] caiogondim / jasmine-sublime-snippets](https://github.com/caiogondim/jasmine-sublime-snippets) - Snippets for Jasmine, the BDD framework for testing JavaScript, in Sublime Text
 
@@ -243,13 +243,13 @@ $ npm run setup
   /app
 
     /bookmarks >> CRUD example with mock
-      >> require.load.js map all js files in the directory
+      >> package.js map all js files in the directory
          this file is referenced as a dependency on /app/main/module.js
       /mock
-        >> require.load.js map all js files in the directory
+        >> package.js map all js files in the directory
            this file is referenced as a dependency on /require.mock.load.js
       /tests/unit
-        >> require.load.js map all js files in the directory
+        >> package.js map all js files in the directory
            this file is referenced as a dependency on /require.unit.load.js
       /tests/e2e
         >> files loaded from Protractor config specs regexp
@@ -265,7 +265,7 @@ $ npm run setup
 
     /main
       >> main application module where other modules are charged on /module.js
-      >> require.load.js map all js files in the directory
+      >> package.js map all js files in the directory
          this file is referenced as a dependency on /ng.app.js
 
   /shared

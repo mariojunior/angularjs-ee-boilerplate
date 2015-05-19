@@ -3,16 +3,13 @@ define(function(require) {
 
   var module = require('./module');
 
-  module.factory(
+  module.factory('PaginationFactory', PaginationFactory);
 
-    // factory name
-    'PaginationFactory',
+  //---
 
-  // dependencies injection
-  [ //'$rootScope',
+  //PaginationFactory.$inject = [];
 
-  // factory definition
-  function() {
+  function PaginationFactory() {
 
     var Pagination = (function() {
 
@@ -108,6 +105,14 @@ define(function(require) {
 
     var instanceCache = {};
 
+    var service = {
+      get: getInstance
+    };
+
+    return service;
+
+    //---
+
     function getInstance(name) {
       var instance = instanceCache[name];
       if(instance) {
@@ -119,12 +124,6 @@ define(function(require) {
       }
     }
 
-    return {
-      get: function(name) {
-        return getInstance(name);
-      }
-    };
-
-  }]);
+  }
 
 });

@@ -1,6 +1,6 @@
 describe('Testing Help Controller', function() {
 
-  var ctrl, scope, httpBackend;
+  var vm;
 
   // excuted before each "it" is run
   beforeEach(function() {
@@ -9,14 +9,14 @@ describe('Testing Help Controller', function() {
     module('help');
 
     // inject dependencies
-    inject(function($controller, $rootScope, $httpBackend) {
-      scope = $rootScope.$new();
+    inject(function($controller) {
 
-      ctrl = $controller('HelpCtrl', {
-        $scope: scope
+      var githubUser = {login: 'erkobridee'};
+
+      vm = $controller('HelpCtrl', {
+        githubUser: githubUser
       });
 
-      httpBackend = $httpBackend;
     });
 
   });
@@ -25,30 +25,14 @@ describe('Testing Help Controller', function() {
   it('should have a pageName equals to \'Help Page\'', function() {
 
     // assertions
-    expect(scope.pageName).toEqual('Help Page');
+    expect(vm.pageName).toEqual('Help Page');
 
   });
 
+  it("should have a githubUser equals to \'erkobridee\'", function() {
 
-  describe("Request GitHub user", function() {
-
-    it("Success", function() {
-
-      // arrange
-      var find = 'erkobridee';
-
-      httpBackend.when('GET', 'https://api.github.com/users/'+find )
-        .respond(function(method, url, data) {
-          return [200, {login: find}];
-        });
-
-      // act
-      httpBackend.flush();
-
-      // assertions
-      expect(scope.githubUser.login).toEqual(find);
-
-    });
+    // assertions
+    expect(vm.githubUser.login).toEqual('erkobridee');
 
   });
 

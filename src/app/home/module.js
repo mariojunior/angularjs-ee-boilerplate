@@ -2,7 +2,9 @@ define(function(require) {
   'use strict';
 
   var angular = require('angular');
-  require('angularRoute');
+
+  require('uiRouter');
+
   require('toaster');
 
   // angular module definition
@@ -12,7 +14,7 @@ define(function(require) {
 
     // module dependencies
     [
-      'ngRoute',
+      'ui.router',
 
       'toaster'
     ]

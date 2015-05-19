@@ -3,18 +3,14 @@ define(function(require) {
 
   var module = require('./module');
 
-  module.controller(
+  module.controller('MainCtrl', MainCtrl);
 
-    // controller name
-    'MainCtrl',
+  //---
 
-    // dependencies injection
-    ['ProgressConfig', 'MenuConfig', '$scope',
+  MainCtrl.$inject = ['ProgressConfig', 'MenuConfig'];
 
-  // controller definition
-  function(progressConfig, menu, $scope) {
-
-    $scope.appLoaded = 'ok';
+  function MainCtrl(progressConfig, menu) {
+    var vm = this;
 
     //--- @begin: loading progressbar config
     progressConfig.eventListeners();
@@ -23,15 +19,17 @@ define(function(require) {
     //--- @end: loading progressbar config
 
     //--- @begin: menu items
-    menu.addMenuItem('Home', '');
+    menu.addMenuItem('Home', 'home');
     menu.addMenuItem('Bookmarks', 'bookmarks');
 
+
     // TODO: add here new item
+
 
     menu.addMenuItem('About', 'about');
     menu.addMenuItem('Help', 'help', 'right');
     //--- @end: menu items
 
-  }]);
+  }
 
 });

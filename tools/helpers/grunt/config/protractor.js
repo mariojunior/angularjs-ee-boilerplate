@@ -1,3 +1,7 @@
+var getIpAddress = require('../../lib/localip');
+
+//---
+
 module.exports = function(grunt) {
 
 grunt.config('protractor', {
@@ -6,7 +10,7 @@ grunt.config('protractor', {
     options: {
       configFile: 'config.protractor.js',
       args: {
-        baseUrl: 'http://localhost:<%= project.frontend.port.webserver %>'
+        baseUrl: 'http://' + getIpAddress() + ':<%= project.frontend.port.webserver %>'
       }
     }
   }

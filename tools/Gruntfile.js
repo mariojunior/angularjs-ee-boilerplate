@@ -56,7 +56,7 @@ module.exports = function(grunt) {
     'karma:ci',
     'copy:prod_jstobuild',
     'html2js:prod',
-    'rewriterequireconfig',
+    'rewriteRequireConfig',
     'requirejs',
     'clean:build',
     'copy:prod_todist',
@@ -64,7 +64,9 @@ module.exports = function(grunt) {
     'less:prod',
     'htmlmin',
     'imagemin',
-    'uglify'
+    'uglify',
+    'concat:requireConfigDist',
+    'clean:distUnusedFiles'
   ]);
 
   //--- @end: build tasks
