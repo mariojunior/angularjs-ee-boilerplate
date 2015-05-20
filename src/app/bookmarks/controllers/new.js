@@ -4,31 +4,18 @@ define(function(require) {
   var module = require('../module');
   require('../resources/rest');
 
-  module.controller('BookmarksNewCtrl', BookmarksNewCtrl);
+  module.controller(
 
-  //---
+    // controller name
+    'BookmarksNewCtrl',
 
-  BookmarksNewCtrl.$inject = [
-    '$rootScope', '$scope',
-    'BookmarksResource', 'InputFocusFactory'
-  ];
+    // dependencies injection
+    ['$rootScope', '$scope', 'BookmarksResource', 'InputFocusFactory',
 
-  function BookmarksNewCtrl($rootScope, $scope, Resource, input) {
-    var vm = this;
-
-    vm.title = 'New Bookmark';
-
-    vm.bookmark = new Resource({
-      'id':0,
-      'name':'',
-      'description':'',
-      'url':''
-    });
-
-    vm.save = save;
+  // controller definition
+  function ($rootScope, $scope, Resource, input) {
 
     //---
-
     var ctrlName = 'BookmarksNewCtrl';
     input = input.get(ctrlName);
 
@@ -41,15 +28,23 @@ define(function(require) {
     input.setFocus('focusBookmarkNameInput', 200);
 
     //console.debug(input);
-
     //---
 
-    function save() {
-      vm.bookmark.$save(function(res) {
+    $scope.title = 'New Bookmark';
+
+    $scope.bookmark = new Resource({
+      'id':0,
+      'name':'',
+      'description':'',
+      'url':''
+    });
+
+    $scope.save = function() {
+      $scope.bookmark.$save(function(res) {
         $rootScope.$emit('bookmarks:add:event', 'added');
       });
-    }
+    };
 
-  }
+  }]);
 
 });

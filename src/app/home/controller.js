@@ -3,25 +3,24 @@ define(function(require) {
 
   var module = require('./module');
 
-  module.controller('HomeCtrl', HomeCtrl);
+  module.controller(
 
-  //---
+    // controller name
+    'HomeCtrl',
 
-  HomeCtrl.$inject = ['toaster'];
+    // dependencies injection
+    ['$scope', 'toaster',
 
-  function HomeCtrl($toaster) {
-    var vm = this;
+  // controller definition
+  function ($scope, $toaster) {
 
-    vm.pageName = 'Home Page';
-    vm.popup = popup;
+    $scope.pageName = 'Home Page';
 
-    //---
-
-    function popup(type) {
+    $scope.popup = function(type) {
       $toaster.pop(type, 'Title', 'Short description text...');
       return 'toaster ' + type;
-    }
+    };
 
-  }
+  }]);
 
 });

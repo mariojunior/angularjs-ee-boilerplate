@@ -3,36 +3,29 @@ define(function(require) {
 
   var module = require('../module');
 
-  module.factory('ProgressStatus', ProgressStatus);
+  module.factory(
 
-  //---
+    // resource name
+    'ProgressStatus',
 
-  ProgressStatus.$inject = ['$rootScope'];
+  ['$rootScope',
 
-  function ProgressStatus($rootScope) {
+  function($rootScope) {
 
-    var service = {
-      start: start,
-      progress: progress,
-      complete: complete
+    return {
+      start: function() {
+        $rootScope.$emit('loadingbar:start:event');
+      },
+
+      progress: function(value) {
+        $rootScope.$emit('loadingbar:progress:event', value*100);
+      },
+
+      complete: function() {
+        $rootScope.$emit('loadingbar:complete:event');
+      }
     };
 
-    return service;
-
-    //---
-
-    function start() {
-      $rootScope.$emit('loadingbar:start:event');
-    }
-
-    function progress(value) {
-      $rootScope.$emit('loadingbar:progress:event', value*100);
-    }
-
-    function complete() {
-      $rootScope.$emit('loadingbar:complete:event');
-    }
-
-  }
+  }]);
 
 });

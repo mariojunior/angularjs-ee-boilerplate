@@ -3,13 +3,16 @@ define(function(require) {
 
   var module = require('shared/mock/module');
 
-  module.factory('Helpers', HelpersFactory);
+  module.factory(
 
-  //---
+    // factory name
+    'Helpers',
 
-  //HelpersFactory.$inject = [];
+    // factory dependencies injection
+    [
 
-  function HelpersFactory() {
+  // factory definition
+  function() {
 
     var Helpers = (function() {
 
@@ -88,7 +91,7 @@ define(function(require) {
       ClassDef.prototype.notFound = function( id ) {
         var msg = 'Not found';
         if( id ) msg += ' - id: ' + id;
-        return this.createResultMessage( 404, msg );
+        return createResultMessage( 404, msg );
       };
 
       ClassDef.prototype.paginate = function( data, options ) {
@@ -159,6 +162,6 @@ define(function(require) {
 
     return new Helpers();
 
-  }
+  }]);
 
 });

@@ -8,7 +8,7 @@ define(function(require) {
   require('./controllers/search');
   require('./resources/rest');
   require('./resources/search');
-  require('./states');
+  require('./routes');
 
   return module;
 

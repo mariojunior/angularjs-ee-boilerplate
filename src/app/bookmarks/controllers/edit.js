@@ -4,35 +4,18 @@ define(function(require) {
   var module = require('../module');
   require('../resources/rest');
 
-  module.controller('BookmarksEditCtrl', BookmarksEditCtrl);
+  module.controller(
 
-  //---
+    // controller name
+    'BookmarksEditCtrl',
 
-  BookmarksEditCtrl.$inject = [
-    '$rootScope', '$scope',
-    'BookmarksResource', '$stateParams',
-    'InputFocusFactory'
-  ];
+    // dependencies injection
+    ['$rootScope', '$scope', 'BookmarksResource', '$routeParams', 'InputFocusFactory',
 
-  function BookmarksEditCtrl($rootScope, $scope, resource, params, input) {
-    var vm = this;
-
-    vm.title = 'Edit Bookmark : ' + params.id;
-
-    vm.bookmark = undefined;
-
-    vm.showConfirm = false;
-
-    vm.save = save;
-
-    vm.remove = remove;
-
-    vm.cancelRemove = cancelRemove;
-
-    vm.destroy = destroy;
+  // controller definition
+  function ($rootScope, $scope, resource, $routeParams, input) {
 
     //---
-
     var ctrlName = 'BookmarksEditCtrl';
     input = input.get(ctrlName);
 
@@ -43,40 +26,40 @@ define(function(require) {
       ]);
 
     //console.debug(input);
-
     //---
 
-    // TODO: move to route resolve?
-    resource.get({id: params.id}, function(result) {
-      vm.bookmark = result;
+    $scope.title = 'Edit Bookmark : ' + $routeParams.id;
+
+    resource.get({id: $routeParams.id}, function(result) {
+      $scope.bookmark = result;
       input.setFocus('focusBookmarkNameInput', 200);
     });
 
-    //---
-
-    function save() {
-      vm.bookmark.$update({id: params.id}, function(res) {
+    $scope.save = function() {
+      $scope.bookmark.$update({id: $routeParams.id}, function(res) {
         $rootScope.$emit('bookmarks:update:event', 'updated');
       });
-    }
+    };
 
-    function remove() {
-      vm.showConfirm = true;
-    }
+    $scope.showConfirm = false;
 
-    function cancelRemove() {
-      vm.showConfirm = false;
+    $scope.remove = function() {
+      $scope.showConfirm = true;
+    };
+
+    $scope.cancelRemove = function() {
+      $scope.showConfirm = false;
       input.focusReset();
       input.setFocus('focusBookmarkNameInput');
-    }
+    };
 
-    function destroy() {
-      vm.bookmark.$delete({id: params.id}, function(res) {
-        vm.showConfirm = false;
+    $scope.destroy = function() {
+      $scope.bookmark.$delete({id: $routeParams.id}, function(res) {
+        $scope.showConfirm = false;
         $rootScope.$emit('bookmarks:remove:event', 'removed');
       });
-    }
+    };
 
-  }
+  }]);
 
 });

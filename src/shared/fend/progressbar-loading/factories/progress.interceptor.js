@@ -3,13 +3,22 @@ define(function(require) {
 
   var module = require('../module');
 
-  module.factory('ProgressInterceptor', ProgressInterceptor);
+  module.factory(
+    // service name
+    'ProgressInterceptor',
 
-  //---
+    // dependencies injection
+    ['$q', '$cacheFactory', 'ProgressStatus',
 
-  ProgressInterceptor.$inject = ['$q', '$cacheFactory', 'ProgressStatus'];
+  // factory definition
+  function ($q, $cacheFactory, status) {
 
-  function ProgressInterceptor($q, $cacheFactory, status) {
+    // @begin: inject header defaults
+    var httpDefaults;
+    var setHttpProviderDefaults = function(httpProvider) {
+      httpDefaults = httpProvider.defaults;
+    };
+    // @end: inject header defaults
 
     /**
       * The total number of requests made
@@ -21,24 +30,6 @@ define(function(require) {
       */
     var reqsCompleted = 0;
 
-    var httpDefaults;
-
-    var service = {
-      setHttpProviderDefaults: setHttpProviderDefaults,
-      request: handleRequest,
-      response: handleResponse,
-      responseError: handleResponseError
-    };
-
-    return service;
-
-    //---
-
-    // @begin: inject header defaults
-    function setHttpProviderDefaults(httpProvider) {
-      httpDefaults = httpProvider.defaults;
-    }
-    // @end: inject header defaults
 
     function setStart() {
       status.start();
@@ -87,47 +78,50 @@ define(function(require) {
       return cached;
     }
 
-    function handleRequest(config) {
-      if (!isCached(config)) {
-        if (reqsTotal === 0) {
-          setStart();
+    return {
+      'setHttpProviderDefaults': setHttpProviderDefaults,
+
+      'request': function(config) {
+        if (!isCached(config)) {
+          if (reqsTotal === 0) {
+            setStart();
+          }
+          reqsTotal++;
         }
-        reqsTotal++;
-      }
-      return config;
-    }
+        return config;
+      },
 
-    function handleResponse(response) {
-      if (!angular.isDefined(response)) {
-        console.error('No response defined. Aborting operation.');
-        setComplete();
-        return $q.reject(response);
-      }
-
-      if (!isCached(response.config)) {
-        reqsCompleted++;
-        if (reqsCompleted >= reqsTotal) {
+      'response': function(response) {
+        if (!angular.isDefined(response)) {
+          console.error('No response defined. Aborting operation.');
           setComplete();
-        } else {
-          setProgress();
+          return $q.reject(response);
         }
-      }
-      return response;
-    }
 
-    function handleResponseError(rejection) {
-      if (!isCached(rejection.config)) {
-        reqsCompleted++;
-        if (reqsCompleted >= reqsTotal) {
-          setComplete();
-        } else {
-          setProgress();
+        if (!isCached(response.config)) {
+          reqsCompleted++;
+          if (reqsCompleted >= reqsTotal) {
+            setComplete();
+          } else {
+            setProgress();
+          }
         }
+        return response;
+      },
+
+      'responseError': function(rejection) {
+        if (!isCached(rejection.config)) {
+          reqsCompleted++;
+          if (reqsCompleted >= reqsTotal) {
+            setComplete();
+          } else {
+            setProgress();
+          }
+        }
+        return $q.reject(rejection);
       }
-      return $q.reject(rejection);
-    }
+    };
 
-  }
-
+  }]);
 
 });

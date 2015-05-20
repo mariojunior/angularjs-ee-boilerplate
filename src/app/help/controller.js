@@ -3,18 +3,23 @@ define(function(require) {
 
   var module = require('./module');
 
-  module.controller('HelpCtrl', HelpCtrl);
+  module.controller(
 
-  //---
+    // controller name
+    'HelpCtrl',
 
-  HelpCtrl.$inject = ['githubUser']; //'$http'
+    // dependencies injection
+    ['$scope', '$http',
 
-  function HelpCtrl(githubUser) { // $http
-    var vm = this;
+  // controller definition
+  function($scope, $http) {
 
-    vm.pageName = 'Help Page';
-    vm.githubUser = githubUser;
+    $scope.pageName = 'Help Page';
 
-  }
+    $http.get('https://api.github.com/users/erkobridee').success(function(data) {
+      $scope.githubUser = data;
+    });
+
+  }]);
 
 });

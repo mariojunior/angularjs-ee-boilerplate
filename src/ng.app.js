@@ -3,11 +3,7 @@ define(function(require) {
 
   var angular = require('angular');
 
-  angular.element(document).ready(startAngularApp);
-
-  //---
-
-  function startAngularApp() {
+  angular.element(document).ready(function() {
 
     console.log('bootstrap angular application');
 
@@ -21,13 +17,13 @@ define(function(require) {
         // enable mock and intercep $HTTP requests
         require('./require.mock.load').name,
 
-        require('app/main/package').name
+        require('app/main/require.load').name
       ]
     );
 
     // start angular app
     angular.bootstrap(document, [module.name]);
 
-  }
+  });
 
 });
